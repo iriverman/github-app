@@ -180,7 +180,7 @@ public class AvatarLoader {
     }
 
     private void bind(final ImageView view, String url) {
-        if (url == null) {
+        if (TextUtils.isEmpty(url)) {
             p.load(R.drawable.spinner_inner).resize(avatarSize, avatarSize).into(view);
             return;
         }
@@ -197,6 +197,9 @@ public class AvatarLoader {
     }
 
     private String getAvatarUrl(User user) {
+        if (user == null) {
+            return "";
+        }
         String avatarUrl = user.getAvatarUrl();
         if (TextUtils.isEmpty(avatarUrl)) {
             avatarUrl = getAvatarUrl(GravatarUtils.getHash(user.getEmail()));
